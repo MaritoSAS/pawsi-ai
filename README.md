@@ -16,13 +16,19 @@
 
 ---
 
-## Transacciones de Prueba (Stellar Testnet)
+## Campaña en la demo
 
-| Donante | Monto | Destino | Hash Ledger | Estado |
-|---------|-------|---------|-------------|--------|
-| Gómez, María | 150 XLM | Tratamiento Luna - La Caldera | GA5W...3R4Q | ✅ Verificado |
-| Fernández, Juan | 300 XLM | Campaña Castración Vaqueros | GC8K...9P1M | ✅ Verificado |
-| Fundación Puna | 1200 XLM | Licenciamiento Tecnológico Fucolla | GD2X...7L2N | ✅ Verificado |
+La homepage lee `docs/data/base-datos-pawsi-la-caldera-2026-05-28.csv` al construir la página (61 filas, La Caldera, 28/05/2026, Convenio UCASAL). Conteos por tipo de mascota, nombres y aportes de insumos salen de ese archivo. La columna de teléfono no está en el CSV público.
+
+| Indicador | Valor en la base |
+|-----------|------------------|
+| Perros | 28 |
+| Gatos | 31 |
+| Filas sin mascota | 2 |
+| Aporte de insumos | $766.000 |
+| Entidad gestora | Convenio UCASAL |
+
+La tabla de aportes de la demo muestra esos montos en pesos. El ledger Stellar queda como capa ilustrativa y toma este total como contexto de la jornada.
 
 ---
 
@@ -84,6 +90,7 @@ pawsi-ai/
 ├── public/                # Archivos estáticos (logos PNG)
 ├── docs/                  # Documentación del hackathon
 │   ├── data/              # Datos reales de campaña (sin teléfonos)
+│   ├── data/               # Base real La Caldera (sin teléfonos)
 │   ├── pitch-deck-arkiv.md
 │   ├── pitch-deck-stellar.md
 │   ├── checklist-entrega.md
