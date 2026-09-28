@@ -83,6 +83,7 @@ Abrir en el navegador: [http://localhost:9002](http://localhost:9002)
 pawsi-ai/
 ├── public/                # Archivos estáticos (logos PNG)
 ├── docs/                  # Documentación del hackathon
+│   ├── data/              # Datos reales de campaña (sin teléfonos)
 │   ├── pitch-deck-arkiv.md
 │   ├── pitch-deck-stellar.md
 │   ├── checklist-entrega.md
@@ -123,6 +124,7 @@ pawsi-ai/
 | 📊 Pitch Deck Arkiv | [docs/pitch-deck-arkiv.md](docs/pitch-deck-arkiv.md) |
 | 💡 Pitch Deck Stellar | [docs/pitch-deck-stellar.md](docs/pitch-deck-stellar.md) |
 | ✅ Checklist de Entrega | [docs/checklist-entrega.md](docs/checklist-entrega.md) |
+| 📁 Datos reales (La Caldera, 28/05/2026) | [docs/data/](docs/data/) |
 | 📝 Formulario Arkiv | [forms.arkiv.network/punatech26](https://forms.arkiv.network/punatech26) |
 | 📝 Formulario Stellar | [form.typeform.com/to/eFquz55J](https://form.typeform.com/to/eFquz55J) |
 
