@@ -49,6 +49,22 @@ function AnimalMark({ tipo }: { tipo: string }) {
   );
 }
 
+function AportesMeaning() {
+  return (
+    <>
+      Los aportes de la campaña son los gastos de medicamentos y descartables de las cirugías. Nada de ese monto es para el municipio ni para la universidad.
+    </>
+  );
+}
+
+function CirugiasMeaning({ entidad, municipio }: { entidad: string; municipio: string }) {
+  return (
+    <>
+      Las intervenciones quirúrgicas las realizan estudiantes del último año de la carrera de Medicina de la universidad ({entidad}), en modalidad de prácticas profesionales, articuladas con FuCoLla y {municipio}.
+    </>
+  );
+}
+
 export function PawsiDemo({ campaign }: { campaign: CampaignDataset }) {
   const mascotas = campaign.mascotasConTipo;
   const mezclaPerros = mascotas > 0 ? Math.round((campaign.perros / mascotas) * 100) : 0;
@@ -76,6 +92,9 @@ export function PawsiDemo({ campaign }: { campaign: CampaignDataset }) {
               <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
                 {campaign.fecha} · {campaign.entidadGestora}
               </p>
+              <p className="text-[10px] text-slate-600 leading-tight max-w-[240px]">
+                Aportes: medicamentos y descartables de las cirugías
+              </p>
             </div>
           </div>
         </div>
@@ -94,17 +113,20 @@ export function PawsiDemo({ campaign }: { campaign: CampaignDataset }) {
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-headline">
                 Campaña en {campaign.municipio}
               </h2>
-              <p className="text-slate-400 text-lg leading-relaxed">
-                {campaign.totalRegistros} registros de la base FuCoLla, entidad gestora {campaign.entidadGestora}.{" "}
-                {campaign.perros} perros y {campaign.gatos} gatos, con un aporte de insumos de {formatPesos(campaign.aporteTotal)}.
+              <p className="text-slate-300 text-lg leading-relaxed">
+                {campaign.totalRegistros} registros de la base FuCoLla. {campaign.perros} perros y {campaign.gatos} gatos.{" "}
+                <CirugiasMeaning entidad={campaign.entidadGestora} municipio={campaign.municipio} />
+              </p>
+              <p className="text-white text-base leading-relaxed mt-4 max-w-3xl">
+                <AportesMeaning /> El total en la base es {formatPesos(campaign.aporteTotal)}.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
-                { n: "3", color: "#4C9F38", title: "Salud y Bienestar", desc: "Registros de perros y gatos atendidos en la jornada municipal." },
-                { n: "11", color: "#F99D1C", title: "Ciudades Sostenibles", desc: `Cobertura de la base en ${campaign.municipio}, provincia de Salta.` },
-                { n: "17", color: "#1F436A", title: "Alianzas Estratégicas", desc: `${campaign.entidadGestora} junto a ONG Fucolla en la carga de la jornada.` },
+                { n: "3", color: "#4C9F38", title: "Salud y Bienestar", desc: "Cirugías de perros y gatos en prácticas profesionales de estudiantes de último año de Medicina." },
+                { n: "11", color: "#F99D1C", title: "Ciudades Sostenibles", desc: `Jornada articulada con FuCoLla y ${campaign.municipio}, provincia de Salta.` },
+                { n: "17", color: "#1F436A", title: "Alianzas Estratégicas", desc: `Prácticas de ${campaign.entidadGestora} con FuCoLla y ${campaign.municipio}. Los aportes no van al municipio ni a la universidad.` },
               ].map((goal) => (
                 <div key={goal.n} className="bg-white/5 border border-white/10 p-6 rounded-2xl">
                   <div className="flex items-center gap-4 mb-4">
@@ -127,7 +149,7 @@ export function PawsiDemo({ campaign }: { campaign: CampaignDataset }) {
                 <div>
                   <CardTitle className="text-xl font-headline">Panel de la jornada</CardTitle>
                   <CardDescription>
-                    Conteos por tipo de mascota y aportes tomados de {campaign.fuente}
+                    Conteos por tipo de mascota tomados de {campaign.fuente}. Los aportes de la campaña cubren medicamentos y descartables de las cirugías.
                   </CardDescription>
                 </div>
                 <Badge variant="outline" className="bg-primary/5 text-primary border-primary/20">
@@ -144,11 +166,11 @@ export function PawsiDemo({ campaign }: { campaign: CampaignDataset }) {
                 ></div>
                 <div className="relative h-full flex flex-col items-center justify-center text-center p-6 space-y-2">
                   <span className="text-[10px] font-bold text-primary bg-primary/20 px-3 py-1 rounded-full uppercase tracking-widest border border-primary/30">
-                    Municipio de la base
+                    Lugar de la jornada
                   </span>
                   <h3 className="text-3xl font-bold text-white font-headline">{campaign.municipio}</h3>
-                  <p className="text-slate-400 text-sm font-medium">
-                    {campaign.fecha} · {campaign.entidadGestora}
+                  <p className="text-slate-300 text-sm font-medium max-w-md">
+                    {campaign.fecha} · {campaign.entidadGestora}. El municipio es el lugar de la campaña: no recibe los aportes.
                   </p>
                 </div>
               </div>
@@ -168,9 +190,12 @@ export function PawsiDemo({ campaign }: { campaign: CampaignDataset }) {
                 </div>
                 <div className="p-6 rounded-2xl bg-slate-50 border border-slate-100 text-center">
                   <Coins className="w-5 h-5 mx-auto mb-3 text-slate-400" />
-                  <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Aporte de insumos</p>
+                  <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Aportes de la campaña</p>
                   <p className="text-3xl font-bold text-emerald-600 font-headline">{formatPesos(campaign.aporteTotal)}</p>
-                  <p className="text-[10px] font-bold text-slate-500 mt-3">{campaign.pagados} filas con observación Pagado</p>
+                  <p className="text-xs text-slate-700 mt-3 leading-snug">
+                    Medicamentos y descartables de las cirugías. No es para el municipio ni para la universidad.
+                  </p>
+                  <p className="text-[10px] font-bold text-slate-500 mt-2">{campaign.pagados} filas con observación Pagado</p>
                 </div>
               </div>
 
@@ -184,8 +209,13 @@ export function PawsiDemo({ campaign }: { campaign: CampaignDataset }) {
                   <span><strong>{campaign.sinMascota}</strong> filas sin mascota</span>
                 </div>
                 <div className="flex items-center gap-3 rounded-2xl border border-slate-100 px-4 py-3">
-                  <ShieldCheck className="w-4 h-4 text-primary" />
-                  <span>{campaign.entidadGestora}</span>
+                  <ShieldCheck className="w-4 h-4 text-primary shrink-0" />
+                  <span>
+                    {campaign.entidadGestora}
+                    <span className="block text-[11px] text-slate-500 leading-snug">
+                      Prácticas de estudiantes de último año de Medicina. La universidad no recibe los aportes.
+                    </span>
+                  </span>
                 </div>
               </div>
             </CardContent>
@@ -207,8 +237,9 @@ export function PawsiDemo({ campaign }: { campaign: CampaignDataset }) {
               <CardContent className="space-y-6">
                 <div className="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl">
                   <p className="text-sm leading-relaxed text-slate-100">
-                    En {campaign.municipio}, el {campaign.fecha}, {campaign.entidadGestora} dejó {campaign.perros} perros y {campaign.gatos} gatos en la base.
-                    El aporte de insumos declarado suma {formatPesos(campaign.aporteTotal)}.
+                    En {campaign.municipio}, el {campaign.fecha}, la base registra {campaign.perros} perros y {campaign.gatos} gatos.{" "}
+                    <CirugiasMeaning entidad={campaign.entidadGestora} municipio={campaign.municipio} />{" "}
+                    Los aportes suman {formatPesos(campaign.aporteTotal)} y cubren medicamentos y descartables de esas cirugías. Nada de ese monto es para el municipio ni para la universidad.
                     {muestra ? ` Entre los nombres figuran ${muestra}.` : ""}
                   </p>
                 </div>
@@ -254,7 +285,10 @@ export function PawsiDemo({ campaign }: { campaign: CampaignDataset }) {
                   <Badge variant="outline" className="shrink-0">{animal.tipo || "Sin tipo"}</Badge>
                 </div>
                 <div className="flex items-center justify-between gap-3 text-sm">
-                  <span className="font-bold text-primary">{formatPesos(animal.aporte)}</span>
+                  <div>
+                    <span className="font-bold text-primary">{formatPesos(animal.aporte)}</span>
+                    <p className="text-[10px] text-slate-500 leading-tight">medicamentos y descartables</p>
+                  </div>
                   <Badge variant="secondary" className={observacionClass(animal.observaciones)}>
                     {display(animal.observaciones, "Sin observación")}
                   </Badge>
@@ -272,9 +306,9 @@ export function PawsiDemo({ campaign }: { campaign: CampaignDataset }) {
             <CardHeader className="bg-slate-50/50 border-b">
               <div className="flex justify-between items-start gap-4">
                 <div>
-                  <CardTitle className="text-xl font-headline">Aportes de insumos</CardTitle>
+                  <CardTitle className="text-xl font-headline">Aportes de la campaña</CardTitle>
                   <CardDescription>
-                    Montos en pesos de la jornada del {campaign.fecha}. Total {formatPesos(campaign.aporteTotal)}.
+                    Gastos de medicamentos y descartables de las cirugías del {campaign.fecha}. Total {formatPesos(campaign.aporteTotal)}. Nada de este monto es para el municipio ni para la universidad.
                   </CardDescription>
                 </div>
                 <Badge className="bg-blue-50 text-blue-700 border-blue-200">
@@ -283,8 +317,10 @@ export function PawsiDemo({ campaign }: { campaign: CampaignDataset }) {
               </div>
             </CardHeader>
             <CardContent className="p-6">
-              <p className="text-xs text-muted-foreground mb-4">
-                Contexto de campaña para la demo de transparencia: aportes en pesos de {campaign.municipio}. El ledger Stellar de la demo es una capa ilustrativa y usa {formatPesos(campaign.aporteTotal)} como cifra de la jornada.
+              <p className="text-sm text-foreground mb-4 leading-relaxed">
+                <AportesMeaning />{" "}
+                <CirugiasMeaning entidad={campaign.entidadGestora} municipio={campaign.municipio} />{" "}
+                Las cifras salen de la base. El ledger Stellar de la demo es una capa ilustrativa y usa {formatPesos(campaign.aporteTotal)} como total de la jornada.
               </p>
               <div className="overflow-x-auto">
                 <Table>
@@ -294,7 +330,10 @@ export function PawsiDemo({ campaign }: { campaign: CampaignDataset }) {
                       <TableHead className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Mascota</TableHead>
                       <TableHead className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Tipo</TableHead>
                       <TableHead className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Responsable</TableHead>
-                      <TableHead className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Aporte</TableHead>
+                      <TableHead className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                        Aporte
+                        <span className="block normal-case tracking-normal font-medium text-slate-500">medicamentos y descartables</span>
+                      </TableHead>
                       <TableHead className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Observación</TableHead>
                     </TableRow>
                   </TableHeader>
@@ -303,7 +342,12 @@ export function PawsiDemo({ campaign }: { campaign: CampaignDataset }) {
                       <AporteRow key={row.id} row={row} />
                     ))}
                     <TableRow className="border-slate-100 bg-slate-50/80">
-                      <TableCell colSpan={4} className="font-bold py-4">Total de la base</TableCell>
+                      <TableCell colSpan={4} className="font-bold py-4">
+                        Total de aportes de la campaña
+                        <span className="block text-xs font-medium text-muted-foreground mt-1">
+                          Medicamentos y descartables de las cirugías. No es para el municipio ni para la universidad.
+                        </span>
+                      </TableCell>
                       <TableCell className="text-primary font-extrabold">{formatPesos(campaign.aporteTotal)}</TableCell>
                       <TableCell className="text-xs text-muted-foreground">{campaign.totalRegistros} filas</TableCell>
                     </TableRow>
@@ -326,8 +370,8 @@ export function PawsiDemo({ campaign }: { campaign: CampaignDataset }) {
                   </div>
                   <h3 className="text-xl font-bold text-white font-headline">Sustentabilidad Fucolla</h3>
                 </div>
-                <p className="text-sm text-slate-400">
-                  En esta jornada el aporte de insumos es {formatPesos(campaign.aporteTotal)}, declarado ante {campaign.entidadGestora}.
+                <p className="text-sm text-slate-300 leading-relaxed">
+                  En esta jornada los aportes suman {formatPesos(campaign.aporteTotal)}. Son gastos de medicamentos y descartables de las cirugías, no fondos para el municipio ni para la universidad ({campaign.entidadGestora}).
                 </p>
               </div>
 
@@ -337,15 +381,15 @@ export function PawsiDemo({ campaign }: { campaign: CampaignDataset }) {
                     <Layers className="w-4 h-4 text-primary" /> Licenciamiento SaaS
                   </p>
                   <p className="text-xs text-slate-400 leading-relaxed">
-                    Los municipios abonan una tasa mensual por infraestructura Pawsi Maps AI, cubriendo costos operativos.
+                    Los municipios abonan una tasa mensual por infraestructura Pawsi Maps AI, cubriendo costos operativos. Esa tasa no sale de los aportes de la campaña.
                   </p>
                 </div>
                 <div className="bg-white/5 p-5 rounded-2xl border border-white/10">
                   <p className="font-bold text-white text-sm mb-2 flex items-center gap-2">
-                    <Heart className="w-4 h-4 text-rose-400" /> Aportes de la jornada
+                    <Heart className="w-4 h-4 text-rose-400" /> Aportes de la campaña
                   </p>
-                  <p className="text-xs text-slate-400 leading-relaxed">
-                    Ledger Stellar ilustrativo. La cifra de campaña en la base es {formatPesos(campaign.aporteTotal)} en insumos.
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    Medicamentos y descartables de las cirugías: {formatPesos(campaign.aporteTotal)}. Las intervenciones las realizan estudiantes del último año de Medicina ({campaign.entidadGestora}) en prácticas profesionales, articuladas con FuCoLla y {campaign.municipio}.
                   </p>
                 </div>
               </div>
@@ -368,7 +412,7 @@ export function PawsiDemo({ campaign }: { campaign: CampaignDataset }) {
             <p className="text-sm font-bold text-slate-900 font-headline">Pawsi AI 2026</p>
           </div>
           <p className="text-xs font-semibold text-slate-500 text-center max-w-lg leading-relaxed">
-            Jornada {campaign.fecha} en {campaign.municipio}, {campaign.entidadGestora}. ONG Fucolla · Hackathon Puna Tech · Salta, Argentina.
+            Jornada {campaign.fecha} en {campaign.municipio}. Cirugías en prácticas profesionales de estudiantes de último año de Medicina ({campaign.entidadGestora}), articuladas con FuCoLla. Los aportes cubren medicamentos y descartables, no al municipio ni a la universidad. ONG Fucolla · Hackathon Puna Tech · Salta, Argentina.
           </p>
           <div className="flex gap-4">
             <Share2 className="w-4 h-4 text-slate-400" />
