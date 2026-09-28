@@ -18,14 +18,16 @@
 
 ## Campaña en la demo
 
-La homepage lee `docs/data/base-datos-pawsi-la-caldera-2026-05-28.csv` al construir la página (61 filas, La Caldera, 28/05/2026, Convenio UCASAL). Conteos por tipo de mascota, nombres y aportes de insumos salen de ese archivo. La columna de teléfono no está en el CSV público.
+La homepage lee `docs/data/base-datos-pawsi-la-caldera-2026-05-28.csv` al construir la página (61 filas, La Caldera, 28/05/2026, Convenio UCASAL). Conteos por tipo de mascota, nombres y aportes salen de ese archivo. La columna de teléfono no está en el CSV público.
+
+Los aportes de la campaña son los gastos de medicamentos y descartables de las cirugías. Nada de ese monto es para el municipio ni para la universidad. Las intervenciones quirúrgicas las realizan estudiantes del último año de la carrera de Medicina de la universidad (Convenio UCASAL), en modalidad de prácticas profesionales, articuladas con FuCoLla y La Caldera.
 
 | Indicador | Valor en la base |
 |-----------|------------------|
 | Perros | 28 |
 | Gatos | 31 |
 | Filas sin mascota | 2 |
-| Aporte de insumos | $766.000 |
+| Aportes de la campaña (medicamentos y descartables) | $766.000 |
 | Entidad gestora | Convenio UCASAL |
 
 La tabla de aportes de la demo muestra esos montos en pesos. El ledger Stellar queda como capa ilustrativa y toma este total como contexto de la jornada.
