@@ -125,6 +125,7 @@ pawsi-ai/
 | 💡 Pitch Deck Stellar | [docs/pitch-deck-stellar.md](docs/pitch-deck-stellar.md) |
 | ✅ Checklist de Entrega | [docs/checklist-entrega.md](docs/checklist-entrega.md) |
 | 📁 Datos reales (La Caldera, 28/05/2026) | [docs/data/](docs/data/) |
+| 🎬 Video demo | [`/demo-pawsi-ai.mp4`](public/demo-pawsi-ai.mp4) · [blob](https://github.com/MaritoSAS/pawsi-ai/blob/cursor/datos-reales-la-caldera-33a1/public/demo-pawsi-ai.mp4) · [raw](https://github.com/MaritoSAS/pawsi-ai/raw/cursor/datos-reales-la-caldera-33a1/public/demo-pawsi-ai.mp4) |
 | 📝 Formulario Arkiv | [forms.arkiv.network/punatech26](https://forms.arkiv.network/punatech26) |
 | 📝 Formulario Stellar | [form.typeform.com/to/eFquz55J](https://form.typeform.com/to/eFquz55J) |
 
